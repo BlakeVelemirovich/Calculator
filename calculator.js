@@ -1,19 +1,27 @@
-function operate(operator, inputNumOne, inputNumTwo) {
-	
-}
+const numButtons = document.querySelectorAll(".number");
+const operButtons = document.querySelectorAll(".operator");
+let num = [null];
+let oper;
 
-function addition(inputNumOne, inputNumTwo) {
-		
-}
+numButtons.forEach(button => {
+	button.addEventListener('click', function() {
+		if (num[0] === null) {
+			num[0] = button.value;
+			console.log(num);
+		}
+		else {
+			num[1] = button.value;
+			console.log(num);
+		}
+	});
+});
 
-function subtraction(inputNumOne, inputNumTwo) {
-	
-}
+operButtons.forEach(button => {
+	button.addEventListener('click', function() {
+		oper = button.value;
+		console.log(oper);
+	});
+});
 
-function multiplication(inputNumOne, inputNumTwo){
-	
-}
 
-function division(inputNumOne, inputNumTwo) {
-	
-}
+
