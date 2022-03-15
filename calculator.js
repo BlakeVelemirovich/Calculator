@@ -1,7 +1,12 @@
+function operate(num, operator) {
+	total
+}
+
 const numButtons = document.querySelectorAll(".number");
 const operButtons = document.querySelectorAll(".operator");
 let num = [null];
 let oper;
+let total;
 
 numButtons.forEach(button => {
 	button.addEventListener('click', function() {
