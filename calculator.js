@@ -14,6 +14,22 @@ function operate(num, operator) {
 		num[0] = total;
 		console.log(total);
 	}
+	
+	// Multiplication
+	if (operator[0] === "multiplication") {
+		
+		total = multiplication(num);
+		num[0] = total;
+		console.log(total);
+	}
+	
+	// Division
+	if (operator[0] == "division") {
+	    
+	    total = division(num);
+	    num[0] = total;
+	    console.log(total);	
+	}
 }
 
 function addition(num) {
@@ -24,6 +40,15 @@ function addition(num) {
 function subtraction(num) {
 	
 	return num[0] - num[1];
+}
+
+function multiplication(num) {
+	
+	return num[0] * num[1];
+}
+
+function division(num) {
+	return num[0] / num[1];
 }
 
 const numButtons = document.querySelectorAll(".number");
@@ -67,6 +92,4 @@ operButtons.forEach(button => {
 		}
 	});
 });
-
-
 
