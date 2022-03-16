@@ -1,54 +1,57 @@
-function operate(num, operator) {
+function operate(userNum, num, operator) {
 	// Addition function returns the sum of the two numbers in num array. Num[0] stores total to be used next operation
 	if (operator[0] === 'plus') {
 		
-		total = addition(num);
-		num[0] = total;
+		total = addition(userNum, num);
+		userNum = parseInt(total);
 		console.log(total);
+		console.log(userNum);
 	}
 	
 	// Subtraction
 	if (operator[0] === 'minus') {
 		
-		total = subtraction(num);
-		num[0] = total;
+		total = subtraction(userNum, num);
+		userNum = parseInt(total);
 		console.log(total);
 	}
 	
 	// Multiplication
 	if (operator[0] === "multiplication") {
 		
-		total = multiplication(num);
-		num[0] = total;
+		total = multiplication(userNum, num);
+		userNum = parseInt(total);
 		console.log(total);
 	}
 	
 	// Division
 	if (operator[0] == "division") {
 	    
-	    total = division(num);
-	    num[0] = total;
+	    total = division(userNum, num);
+	    userNum = parseInt(total);
 	    console.log(total);	
 	}
 }
 
-function addition(num) {
+function addition(userNum, num) {
 	
-	return num[0] + num[1];
+	console.log(userNum, num);
+	return userNum + num;
 }
 
-function subtraction(num) {
+function subtraction(userNum, num) {
 	
-	return num[0] - num[1];
+	return userNum - num;
 }
 
-function multiplication(num) {
+function multiplication(userNum, num) {
 	
-	return num[0] * num[1];
+	return userNum * num;
 }
 
-function division(num) {
-	return num[0] / num[1];
+function division(userNum, num) {
+	
+	return userNum / num;
 }
 
 const numButtons = document.querySelectorAll(".number");
@@ -59,25 +62,24 @@ let total = 0;
 
 numButtons.forEach(button => {
 	button.addEventListener('click', function() {
-		if (num[0] === null) {
-			
-			num[0] = parseInt(button.value);
-			console.log(num);
-		}
-		else {
-			
-			num[1] = parseInt(button.value);
-			console.log(num);
-		}
+		
+		num += button.value;
+		console.log(num);
+		
 	});
 });
 
+let userNum = null;
+
 operButtons.forEach(button => {
 	button.addEventListener('click', function() {
-		if (oper[0] === null) {
+		if (userNum === null) {
 			
 			oper[0] = button.value;
 			console.log(oper);
+			
+			userNum = parseInt(num);
+			num = '';
 		}
 		else {
 			
@@ -85,10 +87,12 @@ operButtons.forEach(button => {
 			console.log(oper);
 		}
 		
-		if (num.length === 2 && oper.length === 2) {
+		if (oper.length === 2) {
 			
-			operate(num, oper);
+			num = parseInt(num);
+			operate(userNum, num, oper);
 			oper.reverse();
+			num = '';
 		}
 	});
 });
