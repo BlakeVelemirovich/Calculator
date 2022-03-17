@@ -1,59 +1,65 @@
-function operate(userNum, num, operator) {
+function operate(previousNum, num, operator) {
 	// Addition function returns the sum of the two numbers in num array. Num[0] stores total to be used next operation
 	if (operator[0] === 'plus') {
 		
-		total = addition(userNum, num);
-		userNum = parseInt(total);
+		total = addition(previousNum, num);
+		updateScreen(total);
 		console.log(total);
-		console.log(userNum);
+	
 	}
 	
 	// Subtraction
 	if (operator[0] === 'minus') {
 		
-		total = subtraction(userNum, num);
-		userNum = parseInt(total);
+		total = subtraction(previousNum, num);
 		console.log(total);
-	}
+		updateScreen(total);
+	}	
 	
 	// Multiplication
 	if (operator[0] === "multiplication") {
 		
-		total = multiplication(userNum, num);
-		userNum = parseInt(total);
+		total = multiplication(previousNum, num);
 		console.log(total);
-	}
+		updateScreen(total);
+	}	
 	
 	// Division
 	if (operator[0] == "division") {
 	    
-	    total = division(userNum, num);
-	    userNum = parseInt(total);
-	    console.log(total);	
-	}
+	    total = division(previousNum, num);
+	    console.log(total);
+		updateScreen(total);
+	}	
 }
 
-function addition(userNum, num) {
+function addition(previousNum, num) {
 	
-	console.log(userNum, num);
-	return userNum + num;
+	console.log(previousNum, num);
+	return previousNum + num;
 }
 
-function subtraction(userNum, num) {
+function subtraction(previousNum, num) {
 	
-	return userNum - num;
+	return previousNum - num;
 }
 
-function multiplication(userNum, num) {
+function multiplication(previousNum, num) {
 	
-	return userNum * num;
+	return previousNum * num;
 }
 
-function division(userNum, num) {
+function division(previousNum, num) {
 	
-	return userNum / num;
+	return previousNum / num;
 }
 
+function updateScreen(append) {
+	
+	display.textContent = append;
+}
+
+const display = document.querySelector('.display');
 const numButtons = document.querySelectorAll(".number");
 const operButtons = document.querySelectorAll(".operator");
 let num = [null];
@@ -64,36 +70,42 @@ numButtons.forEach(button => {
 	button.addEventListener('click', function() {
 		
 		num += button.value;
+		updateScreen(num);
 		console.log(num);
 		
 	});
 });
 
-let userNum = null;
+let previousNum = null;
 
 operButtons.forEach(button => {
 	button.addEventListener('click', function() {
-		if (userNum === null) {
+		if (previousNum === null) {
 			
 			oper[0] = button.value;
+			updateScreen(oper[0]);
 			console.log(oper);
 			
-			userNum = parseInt(num);
+			previousNum = parseInt(num);
 			num = '';
 		}
 		else {
 			
 			oper[1] = button.value;
+			updateScreen(oper);
 			console.log(oper);
 		}
 		
 		if (oper.length === 2) {
 			
 			num = parseInt(num);
-			operate(userNum, num, oper);
+			operate(previousNum, num, oper);
 			oper.reverse();
 			num = '';
+			previousNum = total;
+			updateScreen(previousNum);
 		}
 	});
 });
+
 
