@@ -4,7 +4,6 @@ function operate(previousNum, num, operator) {
 		
 		total = addition(previousNum, num);
 		updateScreen(total);
-		console.log(total);
 	
 	}
 	
@@ -12,7 +11,6 @@ function operate(previousNum, num, operator) {
 	if (operator[0] === 'minus') {
 		
 		total = subtraction(previousNum, num);
-		console.log(total);
 		updateScreen(total);
 	}	
 	
@@ -20,7 +18,6 @@ function operate(previousNum, num, operator) {
 	if (operator[0] === "multiplication") {
 		
 		total = multiplication(previousNum, num);
-		console.log(total);
 		updateScreen(total);
 	}	
 	
@@ -28,14 +25,12 @@ function operate(previousNum, num, operator) {
 	if (operator[0] == "division") {
 	    
 	    total = division(previousNum, num);
-	    console.log(total);
 		updateScreen(total);
 	}	
 }
 
 function addition(previousNum, num) {
 	
-	console.log(previousNum, num);
 	return previousNum + num;
 }
 
@@ -71,7 +66,6 @@ numButtons.forEach(button => {
 		
 		num += button.value;
 		updateScreen(num);
-		console.log(num);
 		
 	});
 });
@@ -84,7 +78,6 @@ operButtons.forEach(button => {
 			
 			oper[0] = button.value;
 			updateScreen(oper[0]);
-			console.log(oper);
 			
 			previousNum = parseInt(num);
 			num = '';
@@ -93,7 +86,6 @@ operButtons.forEach(button => {
 			
 			oper[1] = button.value;
 			updateScreen(oper);
-			console.log(oper);
 		}
 		
 		if (oper.length === 2) {
