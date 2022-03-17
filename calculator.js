@@ -54,6 +54,14 @@ function updateScreen(append) {
 	display.textContent = append;
 }
 
+function clearScreen() {
+	num = [null];
+	oper = [null];
+	previousNum = [null];
+	total = 0;
+	updateScreen('');
+	}
+
 const display = document.querySelector('.display');
 const numButtons = document.querySelectorAll(".number");
 const operButtons = document.querySelectorAll(".operator");
@@ -100,4 +108,7 @@ operButtons.forEach(button => {
 	});
 });
 
-
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', function() {
+	clearScreen();
+});
