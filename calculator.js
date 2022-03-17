@@ -1,6 +1,13 @@
 function operate() {
 	
-	num = parseInt(num);
+	// Fix for when user hits total after pressing an operand button
+	if (num === '') {
+		
+		updateScreen(previousNum);
+		return;
+	}
+	
+	num = parseFloat(num);
 	// Addition function returns the sum of the two numbers in num array. Num[0] stores total to be used next operation
 	if (oper[0] === 'plus') {
 		
@@ -64,7 +71,20 @@ function clearScreen() {
 	total = 0;
 	updateScreen('');
 }
+
+function disableBtn(btn) {
 	
+	btn.forEach (button => {
+		button.disabled = true;
+	});
+}
+
+function enableBtn(btn) {
+
+	btn.forEach (button => {
+		button.disabled = false;
+	});
+}
 
 const display = document.querySelector('.display');
 const numButtons = document.querySelectorAll(".number");
@@ -73,27 +93,33 @@ let num = [null];
 let oper = [null];
 let total = 0;
 
+// Functionality for number buttons, whenever a number is inputted, user can use operator buttons again
 numButtons.forEach(button => {
 	button.addEventListener('click', function() {
 		
 		num += button.value;
 		updateScreen(num);
 		
+		enableBtn(operButtons);
+		
 	});
 });
 
 let previousNum = null;
 
+// Functionality for operator buttons. Buttons disable to prevent double clicking operators
 operButtons.forEach(button => {
 	button.addEventListener('click', function() {
 		if (previousNum === null) {
 			
 			oper[0] = button.value;
 			updateScreen(oper[0]);
-			
-			previousNum = parseInt(num);
+			disableBtn(operButtons);
+			decimalButton.disabled = false;
+			previousNum = parseFloat(num);
 			num = '';
 		}
+		
 		else {
 			
 			oper[1] = button.value;
@@ -103,11 +129,15 @@ operButtons.forEach(button => {
 		if (oper.length === 2) {
 			
 			operate();
+			previousNum = total;
 			oper.reverse();
+			disableBtn(operButtons);
+			decimalButton.disabled = false;
 		}
 	});
 });
 
+// Functionalty for total, clear and decimal buttons.
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', function() {
 	
@@ -118,4 +148,13 @@ const totalButton = document.querySelector('.total');
 totalButton.addEventListener('click', function() {
 	
 	operate();
+	previousNum = null;
+	decimalButton.disabled = false;
+});
+
+const decimalButton = document.querySelector('.dot');
+decimalButton.addEventListener('click', function() {
+	
+	num += '.';
+	decimalButton.disabled = true;
 });
