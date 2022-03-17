@@ -1,32 +1,34 @@
-function operate(previousNum, num, operator) {
+function operate() {
+	
+	num = parseInt(num);
 	// Addition function returns the sum of the two numbers in num array. Num[0] stores total to be used next operation
-	if (operator[0] === 'plus') {
+	if (oper[0] === 'plus') {
 		
 		total = addition(previousNum, num);
-		updateScreen(total);
-	
 	}
 	
 	// Subtraction
-	if (operator[0] === 'minus') {
+	if (oper[0] === 'minus') {
 		
 		total = subtraction(previousNum, num);
-		updateScreen(total);
 	}	
 	
 	// Multiplication
-	if (operator[0] === "multiplication") {
+	if (oper[0] === "multiplication") {
 		
 		total = multiplication(previousNum, num);
-		updateScreen(total);
 	}	
 	
 	// Division
-	if (operator[0] == "division") {
+	if (oper[0] == "division") {
 	    
 	    total = division(previousNum, num);
-		updateScreen(total);
 	}	
+	
+	updateScreen(total);
+	previousNum = total;
+	num = '';
+	
 }
 
 function addition(previousNum, num) {
@@ -55,12 +57,14 @@ function updateScreen(append) {
 }
 
 function clearScreen() {
+
 	num = [null];
 	oper = [null];
 	previousNum = [null];
 	total = 0;
 	updateScreen('');
-	}
+}
+	
 
 const display = document.querySelector('.display');
 const numButtons = document.querySelectorAll(".number");
@@ -98,17 +102,20 @@ operButtons.forEach(button => {
 		
 		if (oper.length === 2) {
 			
-			num = parseInt(num);
-			operate(previousNum, num, oper);
+			operate();
 			oper.reverse();
-			num = '';
-			previousNum = total;
-			updateScreen(previousNum);
 		}
 	});
 });
 
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', function() {
+	
 	clearScreen();
+});
+
+const totalButton = document.querySelector('.total');
+totalButton.addEventListener('click', function() {
+	
+	operate();
 });
